@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-54ec!y6qqwm@sv34e8c73m36r@3j6*&49wn2gpn3vl5%5qa+jb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'twisted-edwards-calculator.herokuapp.com'
+]
 
 
 # Application definition
