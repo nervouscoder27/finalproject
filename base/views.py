@@ -28,8 +28,10 @@ def home(request):
             p = request.session['p'] = adp_form.cleaned_data['p']
             request.session['set'] = True
             new_p = request.session['new_p'] = nextprime(p-1)
+            lo = request.session['lo'] = int(new_p + 1 - 2*(new_p**0.5))
+            hi = request.session['hi'] = int(new_p + 1 + 2*(new_p**0.5))
             prime = (new_p == p)
-            return render(request, 'base/home.html', {'adp_form': adp_form, 'stage': 2, 'a': a, 'd': d, 'p': p, 'new_p': new_p, 'time': math.ceil(new_p*math.log2(new_p)/10000000), 'prime': prime})
+            return render(request, 'base/home.html', {'adp_form': adp_form, 'stage': 2, 'a': a, 'd': d, 'p': p, 'new_p': new_p, 'lo': lo, 'hi': hi, 'time': math.ceil(new_p*math.log2(new_p)/10000000), 'prime': prime})
     return render(request, 'base/home.html', {'adp_form': adp_form, 'stage': 1})
 
 def calc(request):

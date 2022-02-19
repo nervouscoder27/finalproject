@@ -42,9 +42,40 @@
         font-family: 'Noto Sans JP', sans-serif;
       }
     </style>
+
+    <!-- footer styles -->
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      .wrapper {
+        min-height: 100%;
+
+        /* Equal to height of footer */
+        /* But also accounting for potential margin-bottom of last child */
+        margin-bottom: -120px;
+      }
+      .footer_css_tricks,
+      .push {
+        height: 120px;
+      }
+
+      hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0.75),
+          rgba(0, 0, 0, 0)
+        );
+      }
+    </style>
   </head>
   <body class="bg-light">
-    <div class="container bg-white py-3 shadow rounded">
+    <div class="container bg-white py-3 shadow rounded wrapper">
       <a href="{% url 'home' %}" class="btn btn-sm btn-secondary">Go Home</a>
       <h1 id="title" class="text-center">
         Twisted Edwards Curve Calculator over Finite Field
@@ -138,55 +169,112 @@
           {% endfor %}
         </div>
       </div>
-      <form class="my-3" method="post">
+      <form class="my-3 row" method="post">
         {% csrf_token %}
-        <div class="input-group mb-3">
-          {{ opt_form.opt.errors }}
-          <label class="input-group-text" for="id_opt">Select Operation: </label>
-          {{ opt_form.opt }}
+        <!-- <div>
+          <div class="input-group mb-3" style="max-width: 425px;">
+            {{ opt_form.opt.errors }}
+            <label class="input-group-text" for="id_opt">Select Operation: </label>
+            {{ opt_form.opt }}
+          </div>
+        </div> -->
+        <div class="col-12 col-sm-8 col-md-6 col-xl-4">
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="id_opt">Select Operation: </label>
+            {{ opt_form.opt }}
+          </div>
         </div>
-        <div class="input-group mb-3">
-          {{ opt_form.x1.errors }}
-          <label class="input-group-text" for="id_x1">x1: </label>
-          {{ opt_form.x1 }}
+        
+        <div class = "col-12"></div>
+        
+        <div class="col-12 col-sm-4 col-md-3 col-xl-2">
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="id_x1">x1: </label>
+            {{ opt_form.x1 }}
+          </div>
+        </div>
+        
+        <div class="col-12 col-sm-4 col-md-3 col-xl-2">
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="id_y1">y1: </label>
+            {{ opt_form.y1 }}
+          </div>
+        </div>
+        
+        <div class="col-12"></div>
+        
+        
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2 p-0"></div>
+
+        <div class="col p-0">
+            <p id="operator" class="my-3 fs-4 fw-bold">+</p>
+          </div>
+          
+          <div class="col-12"></div>
+
+        <div class="col-12 col-sm-4 col-md-3 col-xl-2">
+          <div id="div_x2" class="input-group mb-3">
+            <label id="label_x2" class="input-group-text" for="id_x2">x2: </label>
+            {{ opt_form.x2 }}
+          </div>
+        </div>
+        
+        <div class="col-12 col-sm-4 col-md-3 col-xl-2">
+          <div id="div_y2" class="input-group mb-3">
+            <label id="label_y2" class="input-group-text" for="id_y2">y2: </label>
+            {{ opt_form.y2 }}
+          </div>
         </div>
 
-        <div class="input-group mb-3">
-          {{ opt_form.y1.errors }}
-          <label class="input-group-text" for="id_y1">y1: </label>
-          {{ opt_form.y1 }}
-        </div>
-
-        <div>
-          <p id="operator" class="text-center my-3 fs-4 fw-bold">+</p>
-        </div>
-
-
+        <!-- errorrs -->
+        {{ opt_form.opt.errors }}
+        {{ opt_form.x1.errors }}
+        {{ opt_form.y1.errors }}
         <h5 class="text-danger">{{ opt_form.x2.errors }}</h5>
-        <div id="div_x2" class="input-group mb-3">
-          <label id="label_x2" class="input-group-text" for="id_x2">x2: </label>
-          {{ opt_form.x2 }}
-        </div>
-
         <h5 class="text-danger">{{ opt_form.y2.errors }}</h5>
-        <div id="div_y2" class="input-group mb-3">
-          <label id="label_y2" class="input-group-text" for="id_y2">y2: </label>
-          {{ opt_form.y2 }}
-        </div>
-        <div id="result">
+        
+        <div class="col-12">
+          <button id="cal_btn" class="btn btn-secondary" type="submit">Calculate</button>
+        </div>  
+
+        <div class="col-12"></div>
+
+        
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2 p-0"></div>
+        <div id="result_equal" class="col p-0">
           {% if result %}
-          <p class="text-center my-3 fs-4 fw-bold">=</p>
+          <p class="my-3 fs-4 fw-bold">=</p>
           <!-- <p id="res_p" class="text-center my-3 fs-4 fw-bold">({{x_res}},{{y_res}})</p> -->
+        </div>
+        
+        <div class="col-12"></div>
+        
+        <div id="result_val" class="col-12 col-sm-8 col-md-6 col-xl-4">
           <input id="res_p" class="text-center my-3 fs-4 fw-bold" value="({{x_res}},{{y_res}})" disabled></input>
           {% else %}
-          <p id="res_p" class="text-center my-3 fs-4 fw-bold"></p>
+          <!-- <p id="res_p" class="text-center my-3 fs-4 fw-bold"></p> -->
           {% endif %}
         </div>
-        <button id="cal_btn" class="btn btn-secondary" type="submit">Calculate</button>
+
       </form>
 
+      <div class="push"></div>  
     </div>
 
+    <footer class="footer_css_tricks">
+      <div class="container text-center fst-italic">
+        <hr />
+        <span class="text-muted">UG Final Year Project Work @2022 </span>
+        <br />
+        <span class="text-muted">Made By Aditya Saha & Ayan Ghosal </span>
+        <br />
+        <span class="text-muted"
+          >Under the guidance of Prof. Utpal Kumar Ray and mentorship of Mr
+          Sujay Kumar Paul</span
+        >
+      </div>
+    </footer>
+  </body>
 
     <!-- Graph script -->
     <script type="text/javascript">
@@ -198,13 +286,15 @@
         };
       })();
     </script>
-  </body>
   
   <script>
     input = document.getElementsByTagName("input");
     for (let i = 0; i < input.length; i++) {
       input[i].addEventListener("change", ()=>{ 
-        document.getElementById("res_p").innerText="";
+        // document.getElementById("res_p").innerText="";
+        //result: d-none result
+        document.getElementById("result_equal").style.display = "none";
+        document.getElementById("result_val").style.display = "none";
       });
       input[i].classList.add("form-control");
     }
@@ -219,7 +309,14 @@
     y2_div = document.getElementById("div_y2");
     operator = document.getElementById("operator");
 
-    opt.addEventListener("change", () => {document.getElementById("res_p").innerText="";changed()})
+    opt.addEventListener("change", () => {
+      document.getElementById("result_equal").style.display = "none";
+      document.getElementById("result_val").style.display = "none";
+      // inp = document.getElementsByTagName("input");
+      // for (let j = 0; j < inp.length; j++) {
+      //   inp[j].value = 0;
+      // }
+      changed()})
     opt.addEventListener("load", changed()) 
     function changed()
     { 
