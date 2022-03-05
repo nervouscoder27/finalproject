@@ -71,6 +71,6 @@ def calc(request):
                 elif(opt == '5'):
                     (x_res,y_res) = t_edwards.multiplypoint(a,d,new_p,(x1,y1), x2)
 
-                return render(request,'base/calculate.html',{'opt_form': opt_form, 'a': a, 'd': d, 'p': new_p, 'xarray': points[0], 'yarray': points[1], 'Array': zip(points[0], points[1]), 'x_res': x_res, 'y_res': y_res, 'result': True})
+                return render(request,'base/calculate.html',{'opt_form': opt_form, 'a': a, 'd': d, 'p': new_p, 'xarray': points[0], 'yarray': points[1], 'Array': zip(points[0], points[1]), 'point_count': len(points[0]), 'x_res': x_res, 'y_res': y_res, 'result': True})
 
-        return render(request,'base/calculate.html',{'opt_form': opt_form, 'a': a, 'd': d, 'p': new_p, 'xarray': points[0], 'yarray': points[1], 'Array': zip(points[0], points[1])})
+        return render(request,'base/calculate.html',{'opt_form': opt_form, 'a': a, 'd': d, 'p': new_p, 'xarray': points[0], 'yarray': points[1], 'Array': zip(points[0], points[1]), 'point_count': len(points[0])})

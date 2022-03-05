@@ -10,6 +10,9 @@
       crossorigin="anonymous"
     />
 
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
     <!-- Bootstrap JS -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -55,11 +58,11 @@
 
         /* Equal to height of footer */
         /* But also accounting for potential margin-bottom of last child */
-        margin-bottom: -120px;
+        margin-bottom: -140px;
       }
       .footer_css_tricks,
       .push {
-        height: 120px;
+        height: 140px;
       }
 
       hr {
@@ -160,8 +163,15 @@
       </div>
 
       <!-- Points -->
-      <h3 class="mb-0">List of Points</h3>
-      <span>(click on point to plot in graph)</span>
+      <div class = "d-flex justify-content-between flex-wrap">
+        <div>
+          <h3 class="mb-0">List of Points</h3>
+          <span>(click on point to plot in graph)</span>
+        </div>
+        <div>
+          <h3>Total Number of Points : <span  id="point_count">{{point_count}}</span></h3>
+        </div>
+      </div>
       <div class="points-div mb-3">
         <div class="row">
           {% for i,j in Array %}
@@ -250,7 +260,11 @@
         <div class="col-12"></div>
         
         <div id="result_val" class="col-12 col-sm-8 col-md-6 col-xl-4">
+          {% if y_res == -1 %}
+          <input id="res_p" class="text-center my-3 fs-4 fw-bold" value="Inverse doesn't exist!" disabled></input>
+          {% else %}
           <input id="res_p" class="text-center my-3 fs-4 fw-bold" value="({{x_res}},{{y_res}})" disabled></input>
+          {%endif%}
           {% else %}
           <!-- <p id="res_p" class="text-center my-3 fs-4 fw-bold"></p> -->
           {% endif %}
@@ -266,11 +280,13 @@
         <hr />
         <span class="text-muted">UG Final Year Project Work @2022 </span>
         <br />
-        <span class="text-muted">Made By Aditya Saha & Ayan Ghosal </span>
+        <span class="text-muted">Jadavpur University, Department of Information Technology, Kolkata</span>
+        <br />
+        <span class="text-muted">Made By Aditya Saha <a href="mailto: adityacont@gmail.com"><i class="bi bi-envelope-fill text-muted"></i></a>  &  Ayan Ghosal <a href="mailto: ayan.ghosal007@gmail.com"><i class="bi bi-envelope-fill text-muted"></i></a> </span>
         <br />
         <span class="text-muted"
-          >Under the guidance of Prof. Utpal Kumar Ray and mentorship of Mr
-          Sujay Kumar Paul</span
+          >Under the guidance of Prof. Utpal Kumar Ray <a href="mailto: sujaykumarpaul@gmail.com"><i class="bi bi-envelope-fill text-muted"></i></a>  and mentorship of Mr
+          Sujay Kumar Paul <a href="mailto: utpal.ray@jadavpuruniversity.in"><i class="bi bi-envelope-fill text-muted"></i></a></span
         >
       </div>
     </footer>

@@ -158,7 +158,7 @@ def addpoints(a,d,p,p1,p2):
     y = ((p1[1]*p2[1]-a*p1[0]*p2[0])*mod_inverse(1-d*p1[0]*p1[1]*p2[0]*p2[1],p))%p
   except:
     print("-*-*-*-*-*-*-*Inverse does not exist, please change the point!!*-*-*-*-*-*-*-")
-    return (0,1)
+    return (0,-1)
   return (x,y)
 
 # 
@@ -202,7 +202,7 @@ def doublepoint(a,d,p,p1):
     y = ((p1[1]**2 - a*p1[0]*p1[0])*mod_inverse(2 - a*p1[0]*p1[0] - p1[1]**2,p))%p
   except:
     print("-*-*-*-*-*-*-*Inverse does not exist, please change the point!!*-*-*-*-*-*-*-")
-    return (0,1)
+    return (0,-1)
   return (x,y)
 
 # 
