@@ -58,11 +58,11 @@
 
         /* Equal to height of footer */
         /* But also accounting for potential margin-bottom of last child */
-        margin-bottom: -140px;
+        margin-bottom: -230px;
       }
       .footer_css_tricks,
       .push {
-        height: 140px;
+        height: 260px;
       }
 
       hr {
@@ -186,7 +186,7 @@
           <span>(click on point to plot in graph)</span>
         </div>
         <div>
-          <h3>Total Number of Points : <span  id="point_count">{{point_count}}</span></h3>
+          <h3>Number of Points in x={{start}} to x={{end}} : <span  id="point_count">{{point_count}}</span></h3>
         </div>
       </div>
       <div class="points-div mb-3">
@@ -294,17 +294,34 @@
 
     <footer class="footer_css_tricks">
       <div class="container text-center fst-italic">
-        <hr />
+        <hr class="mb-md-5" />
         <span class="text-muted">UG Final Year Project Work @2022 </span>
         <br />
-        <span class="text-muted">Jadavpur University, Department of Information Technology, Kolkata</span>
-        <br />
-        <span class="text-muted">Made By Aditya Saha <a href="mailto: adityacont@gmail.com"><i class="bi bi-envelope-fill text-muted"></i></a>  &  Ayan Ghosal <a href="mailto: ayan.ghosal007@gmail.com"><i class="bi bi-envelope-fill text-muted"></i></a> </span>
+        <span class="text-muted"
+          >Jadavpur University, Department of Information Technology,
+          Kolkata</span
+        >
         <br />
         <span class="text-muted"
-          >Under the guidance of Prof. Utpal Kumar Ray <a href="mailto: sujaykumarpaul@gmail.com"><i class="bi bi-envelope-fill text-muted"></i></a>  and mentorship of Mr
-          Sujay Kumar Paul <a href="mailto: utpal.ray@jadavpuruniversity.in"><i class="bi bi-envelope-fill text-muted"></i></a></span
-        >
+          >Made By Aditya Saha
+          <a href="mailto: adityacont@gmail.com">adityacont@gmail.com</a> & Ayan
+          Ghosal
+          <a href="mailto: ayan.ghosal007@gmail.com"
+            >ayan.ghosal007@gmail.com</a
+          >
+        </span>
+        <br />
+        <span class="text-muted"
+          >Under the guidance of Prof. Utpal Kumar Ray
+          <a href="mailto: utpal.ray@jadavpuruniversity.in"
+            >utpal.ray@jadavpuruniversity.in</a
+          >
+          <br />
+          Mentorship of Mr Sujay Kumar Paul
+          <a href="mailto: sujaykumarpaul@gmail.com"
+            >sujaykumarpaul@gmail.com</a
+          >
+        </span>
       </div>
     </footer>
   </body>
@@ -390,5 +407,4 @@
       document.getElementById("cal_btn").focus();
     </script>
     {% endif %}
-  
 </html>
