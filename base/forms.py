@@ -29,13 +29,13 @@ class opt_form(forms.Form):
     def clean_x2(self):
         opt = self.cleaned_data['opt']
         x2 = self.cleaned_data['x2']
-        if (opt == '2' or opt == '3' or opt == '5') and not x2:
-            raise ValidationError("Value required!")
+        if (opt == '2' or opt == '3' or opt == '5') and x2 == None:
+            raise ValidationError("x2: Value required!")
         return x2
     
-    def clean_x3(self):
+    def clean_y2(self):
         opt = self.cleaned_data['opt']
-        x3 = self.cleaned_data['x3']
-        if (opt == '2' or opt == '3') and not x3:
-            raise ValidationError("Value required!")
-        return x3
+        y2 = self.cleaned_data['y2']
+        if (opt == '2' or opt == '3') and y2 == None:
+            raise ValidationError("y2: Value required!")
+        return y2

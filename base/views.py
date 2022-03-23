@@ -34,7 +34,10 @@ def home(request):
             return render(request, 'base/home.html', {'adp_form': adp_form, 'stage': 2, 'a': a, 'd': d, 'p': p, 'new_p': new_p, 'lo': lo, 'hi': hi, 'time': math.ceil(new_p*math.log2(new_p)/10000000), 'prime': prime})
     return render(request, 'base/home.html', {'adp_form': adp_form, 'stage': 1})
 
-def calc(request):
+def calc(request, start=0):
+    # handle start value
+    start = int(start)
+
     # global a,d,p,new_p,set
     if not request.session['set']:
         return render(request,'base/notset.html')
@@ -42,9 +45,10 @@ def calc(request):
         a = request.session['a']
         d = request.session['d']
         new_p = request.session['new_p']
-        points = t_edwards.generatePoints(a,d,new_p)
+        points = t_edwards.generatePoints(a, d, new_p, start)
         opt_form = forms.opt_form()
         
+        # Operations +,-,* trigger POST
         if request.method == "POST":
 
             opt_form = forms.opt_form(request.POST)
@@ -71,6 +75,7 @@ def calc(request):
                 elif(opt == '5'):
                     (x_res,y_res) = t_edwards.multiplypoint(a,d,new_p,(x1,y1), x2)
 
-                return render(request,'base/calculate.html',{'opt_form': opt_form, 'a': a, 'd': d, 'p': new_p, 'xarray': points[0], 'yarray': points[1], 'Array': zip(points[0], points[1]), 'point_count': len(points[0]), 'x_res': x_res, 'y_res': y_res, 'result': True})
+                return render(request,'base/calculate.html',{'opt_form': opt_form, 'a': a, 'd': d, 'p': new_p, 'xarray': points[0], 'yarray': points[1], 'Array': zip(points[0], points[1]), 'point_count': len(points[0]), 'x_res': x_res, 'y_res': y_res, 'result': True, 'start': start, 'end': min(new_p-1, start+999), 'prev': max(0, start-1000), 'next': min(new_p-1, start+1000), 'p_minus_1': new_p-1})
 
-        return render(request,'base/calculate.html',{'opt_form': opt_form, 'a': a, 'd': d, 'p': new_p, 'xarray': points[0], 'yarray': points[1], 'Array': zip(points[0], points[1]), 'point_count': len(points[0])})
+        # GET
+        return render(request,'base/calculate.html',{'opt_form': opt_form, 'a': a, 'd': d, 'p': new_p, 'xarray': points[0], 'yarray': points[1], 'Array': zip(points[0], points[1]), 'point_count': len(points[0]), 'start': start, 'end': min(new_p-1, start+999), 'prev': max(0, start-1000), 'next': min(new_p-1, start+1000), 'p_minus_1': new_p-1})

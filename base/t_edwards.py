@@ -72,11 +72,17 @@ def tonelli_shanks(n, p):
 # writes the points into the opened file
 # 
 
-def generatePoints(a, d, p):
+def generatePoints(a, d, p, start=0):
   #Creating the output file
   x_array = []
   y_array = []
-  for x in range(p):
+
+  # $$$
+  if start > p:
+    start = 0
+
+  # take at max 1000 points
+  for x in range(start, min(start+1000, p)):
       fx = ((a*x*x-1)*pow(d*x*x-1,p-2,p))%p   #finding values of y^2 mod p for every integer value of x in range
       if(isResidue(fx, p)):
         # 4k+3 form

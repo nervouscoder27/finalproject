@@ -99,6 +99,23 @@
         </div>
       </div>
 
+      <div class="d-flex justify-content-between align-items-center flex-wrap mb-1">
+        <h5 class="d-inline">Displaying Points with X coordinates in range : {{start}} to {{end}}</h5>
+        {% if start > 0 or end < p_minus_1 %}
+        <div class="d-flex align-items-center ">
+          <h5 class="d-inline">Choose starting X : </h5>
+          {% if start > 0 %}
+          &nbsp;
+          <a href="/calculate/{{prev}}" class="btn btn-warning"><i class="bi bi-arrow-left-circle-fill"></i> {{prev}}</a>
+          {% endif %}
+          {% if end < p_minus_1 %}
+          &nbsp;
+          <a href="/calculate/{{next}}" class="btn btn-warning">{{next}} <i class="bi bi-arrow-right-circle-fill"></i></a>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+
       <!-- Graph -->
       <div id="scatter-plot" class="border border-5 rounded-3 mb-3 w-100">
         <div id="myPlot"></div>
@@ -326,12 +343,12 @@
     operator = document.getElementById("operator");
 
     opt.addEventListener("change", () => {
-      document.getElementById("result_equal").style.display = "none";
-      document.getElementById("result_val").style.display = "none";
-      // inp = document.getElementsByTagName("input");
-      // for (let j = 0; j < inp.length; j++) {
-      //   inp[j].value = 0;
-      // }
+      try{
+        document.getElementById("result_equal").style.display = "none";
+        document.getElementById("result_val").style.display = "none";
+      }catch(err){
+
+      }
       changed()})
     opt.addEventListener("load", changed()) 
     function changed()

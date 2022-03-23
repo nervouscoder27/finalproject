@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-54ec!y6qqwm@sv34e8c73m36r@3j6*&49wn2gpn3vl5%5qa+jb
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'twisted-edwards-calculator.herokuapp.com'
+    'twisted-edwards-calculator.herokuapp.com',
+    'localhost'
 ]
 
 
