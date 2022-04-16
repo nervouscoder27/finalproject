@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Twisted Edwards Calculator</title>
+    <title>Elliptic Calculator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Bootstrap CSS -->
     <link
@@ -53,6 +53,22 @@
     </style>
     <!-- footer styles -->
     <style>
+      @media only screen and (max-width: 991.5px) {
+        footer {
+          font-size: small;
+        }
+      }
+      @media only screen and (max-width: 456px) {
+        footer {
+          font-size: 0.7em;
+        }
+      }
+      @media only screen and (max-width: 380px) {
+        footer {
+          font-size: 0.6em;
+        }
+      }
+
       html,
       body {
         height: 100%;
@@ -85,16 +101,26 @@
   <body class="bg-light">
     <div class="container bg-white py-3 shadow rounded wrapper">
       <h1 id="title" class="text-center mb-5">
-        Twisted Edwards Curve Calculator over Finite Field
+        Elliptic Curve Calculator over Finite Field
       </h1>
+      <p id="equation">
+        Equation of Twisted Edwards Curve over finite field: $$y² = \frac{ax²
+        -1}{dx² - 1} \hspace{3mm}mod \hspace{1mm}p$$
+      </p>
       <p>
-        Equation of Twisted Edwards Curve over finite field: $$y² = \frac{ax² -
-        1}{dx² - 1} \hspace{3mm}mod \hspace{1mm}p$$
+        Equation of Short Weirstrass Curve over finite field: $$y² = x³ + ax + d
+        \hspace{3mm}mod \hspace{1mm}p$$
       </p>
       <p class="mb-1 fw-bolder">User Input</p>
       <p class="mt-1">Please enter the parameters of the curve :</p>
       <form class="mb-3 row" method="post">
         {% csrf_token %}
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="id_opt">Select Curve:</label>
+            {{ adp_form.opt }}
+          </div>
+        </div>
         <div class="col-12 col-sm-4 col-md-3 col-xl-2">
           <div class="input-group mb-3">
             <label class="input-group-text" for="id_a">a:</label>
@@ -114,9 +140,9 @@
             {{ adp_form.p }}
           </div>
         </div>
-        {{ adp_form.a.errors }}
+        <h5 class="text-danger">{{ adp_form.a.errors }}</h5>
         <h5 class="text-danger">{{ adp_form.d.errors }}</h5>
-        {{ adp_form.p.errors }}
+        <h5 class="text-danger">{{ adp_form.p.errors }}</h5>
 
         <div class="col-12">
           <button type="submit" class="btn btn-secondary">Proceed</button>
@@ -151,16 +177,18 @@
 
     <footer class="footer_css_tricks">
       <div class="container text-center fst-italic">
-        <hr class="mb-md-5" />
+        <hr class="mb-xl-5" />
         <span class="text-muted">UG Final Year Project Work @2022 </span>
-        <br />
+        <!-- <br /> -->
         <span class="text-muted"
           >Jadavpur University, Department of Information Technology,
           Kolkata</span
         >
         <br />
-        <span class="text-muted"
-          >Made By Aditya Saha
+        <span class="text-muted">Developed By : </span>
+        <br />
+        <span class="text-muted">
+          [Twisted Edwards Curve Implementation, Web Interface] : Aditya Saha
           <a href="mailto: adityacont@gmail.com">adityacont@gmail.com</a> & Ayan
           Ghosal
           <a href="mailto: ayan.ghosal007@gmail.com"
@@ -168,13 +196,22 @@
           >
         </span>
         <br />
+        <span class="text-muted">
+          [Short Weirstrass Curve Implementation] : Gargi Ghosal
+          <a href="mailto: ghosalgargi762@gmail.com"
+            >ghosalgargi762@gmail.com</a
+          >
+          & Agni Saha
+          <a href="mailto: agnisaha7799@gmail.com">agnisaha7799@gmail.com</a>
+        </span>
+        <br />
         <span class="text-muted"
           >Under the guidance of Prof. Utpal Kumar Ray
           <a href="mailto: utpal.ray@jadavpuruniversity.in"
             >utpal.ray@jadavpuruniversity.in</a
           >
-          <br />
-          Mentorship of Mr Sujay Kumar Paul
+          <!-- <br /> -->
+          , Mentorship of Mr Sujay Kumar Paul
           <a href="mailto: sujaykumarpaul@gmail.com"
             >sujaykumarpaul@gmail.com</a
           >
@@ -185,9 +222,17 @@
 
   <script>
     input = document.getElementsByTagName("input");
+    select = document.getElementsByTagName("select");
     for (let i = 0; i < input.length; i++) {
       input[i].classList.add("form-control");
     }
+
+    /*
+    apply bootstrap to select inputs
+    for (let i = 0; i < select.length; i++) {
+      select[i].classList.add("form-control");
+    }
+    */
 
     // popover
     var popoverTriggerList = [].slice.call(
@@ -198,6 +243,3 @@
     });
   </script>
 </html>
-
-<!-- sticky footer -->
-<!-- https://css-tricks.com/couple-takes-sticky-footer/ -->

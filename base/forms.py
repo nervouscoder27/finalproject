@@ -2,6 +2,11 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 class adp_form(forms.Form):
+    opt_choices = (
+    ('1', "Twisted Edwards"),
+    ('2', "Short Weirstrass")
+    )
+    opt = forms.ChoiceField(choices = opt_choices)
     a = forms.IntegerField(min_value=2,label='a')
     d = forms.IntegerField(min_value=1,label='d')
     p = forms.IntegerField(min_value=3,label='p')

@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Twisted Edwards Calculator</title>
+    <title>Elliptic Calculator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Bootstrap CSS -->
     <link
@@ -48,6 +48,22 @@
 
     <!-- footer styles -->
     <style>
+      @media only screen and (max-width: 991.5px) {
+        footer{
+          font-size: small
+        }
+      }
+      @media only screen and (max-width: 456px) {
+        footer{
+          font-size: 0.7em
+        }
+      }
+      @media only screen and (max-width: 380px) {
+        footer{
+          font-size: 0.6em
+        }
+      }
+
       html,
       body {
         height: 100%;
@@ -81,7 +97,7 @@
     <div class="container bg-white py-3 shadow rounded wrapper">
       <a href="{% url 'home' %}" class="btn btn-sm btn-secondary">Go Home</a>
       <h1 id="title" class="text-center">
-        Twisted Edwards Curve Calculator over Finite Field
+        Elliptic Curve Calculator over Finite Field
       </h1>
       
       <div class="row mt-5 mb-1 row-cols-auto">
@@ -138,7 +154,11 @@
           var layout = {
             xaxis: { title: "X-axis" },
             yaxis: { title: "Y-axis" },
+            {% if curve == '1' %}
             title: "Twisted Edwards Curve mod({{p}})",
+            {% elif curve == '2' %}
+            title: "Short Weirstrass Curve mod({{p}})",
+            {% endif %}
           };
 
           // Display using Plotly
@@ -254,9 +274,9 @@
         </div>
 
         <!-- errorrs -->
-        {{ opt_form.opt.errors }}
-        {{ opt_form.x1.errors }}
-        {{ opt_form.y1.errors }}
+        <h5 class="text-danger">{{ opt_form.opt.errors }}</h5>
+        <h5 class="text-danger">{{ opt_form.x1.errors }}</h5>
+        <h5 class="text-danger">{{ opt_form.y1.errors }}</h5>
         <h5 class="text-danger">{{ opt_form.x2.errors }}</h5>
         <h5 class="text-danger">{{ opt_form.y2.errors }}</h5>
         
@@ -294,16 +314,18 @@
 
     <footer class="footer_css_tricks">
       <div class="container text-center fst-italic">
-        <hr class="mb-md-5" />
+        <hr class="mb-xl-5" />
         <span class="text-muted">UG Final Year Project Work @2022 </span>
-        <br />
+        <!-- <br /> -->
         <span class="text-muted"
           >Jadavpur University, Department of Information Technology,
           Kolkata</span
         >
         <br />
-        <span class="text-muted"
-          >Made By Aditya Saha
+        <span class="text-muted">Developed By : </span>
+        <br />
+        <span class="text-muted">
+          [Twisted Edwards Curve Implementation, Web Interface] : Aditya Saha
           <a href="mailto: adityacont@gmail.com">adityacont@gmail.com</a> & Ayan
           Ghosal
           <a href="mailto: ayan.ghosal007@gmail.com"
@@ -311,13 +333,22 @@
           >
         </span>
         <br />
+        <span class="text-muted">
+          [Short Weirstrass Curve Implementation] : Gargi Ghosal
+          <a href="mailto: ghosalgargi762@gmail.com"
+            >ghosalgargi762@gmail.com</a
+          >
+          & Agni Saha
+          <a href="mailto: agnisaha7799@gmail.com">agnisaha7799@gmail.com</a>
+        </span>
+        <br />
         <span class="text-muted"
           >Under the guidance of Prof. Utpal Kumar Ray
           <a href="mailto: utpal.ray@jadavpuruniversity.in"
             >utpal.ray@jadavpuruniversity.in</a
           >
-          <br />
-          Mentorship of Mr Sujay Kumar Paul
+          <!-- <br /> -->
+          , Mentorship of Mr Sujay Kumar Paul
           <a href="mailto: sujaykumarpaul@gmail.com"
             >sujaykumarpaul@gmail.com</a
           >
